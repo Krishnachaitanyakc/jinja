@@ -78,6 +78,16 @@ class TestFilter:
             "[[0, 1, 2, 3], [4, 5, 6, 'X'], [7, 8, 9, 'X']]"
         )
 
+    def test_slice_evenly_divisible(self, env):
+        """fill_with should not be appended when items divide evenly."""
+        tmpl = env.from_string("{{ foo|slice(4, 'X')|list }}")
+        out = tmpl.render(foo=[1, 2, 3, 4])
+        assert out == "[[1], [2], [3], [4]]"
+
+        tmpl = env.from_string("{{ foo|slice(2, 'X')|list }}")
+        out = tmpl.render(foo=[1, 2, 3, 4, 5, 6])
+        assert out == "[[1, 2, 3], [4, 5, 6]]"
+
     def test_escape(self, env):
         tmpl = env.from_string("""{{ '<">&'|escape }}""")
         out = tmpl.render()

@@ -13,6 +13,8 @@ Unreleased
 -   Use modern packaging metadata with ``pyproject.toml`` instead of ``setup.cfg``.
     :pr:`1793`
 -   Use ``flit_core`` instead of ``setuptools`` as build backend.
+-   Fix ``slice`` filter incorrectly appending ``fill_with`` value when the
+    iterable length is evenly divisible by the slice count. :issue:`2118`
 
 
 Version 3.1.6
